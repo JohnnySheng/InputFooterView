@@ -9,59 +9,38 @@
 #import <UIKit/UIKit.h>
 #import "FUTextView.h"
 
-@protocol FUVoiceButtonDelegate;
-
-@interface FUVoiceButton : UIButton{
-    
-}
-@property (nonatomic, weak) id<FUVoiceButtonDelegate> voiceButtonDelegate;
-
-- (id)initWithFrame:(CGRect)frame withDelegate:(id<FUVoiceButtonDelegate>) delegate;
-@end
-
-@protocol FUVoiceButtonDelegate <NSObject>
-
-@optional
-- (void)voiceButtonTouchesMoved:(FUVoiceButton* ) voiceButton;
-- (void)voiceButtonTouchesBegin:(FUVoiceButton *)voiceButton;
-- (void)voiceButtonTouchesCancel:(FUVoiceButton *)voiceButton;
-- (void)voiceButtonTouchesEnd:(FUVoiceButton *)voiceButton;
-
-@end
-
-
-
 @protocol MessageInputViewDelegate;
 
-@interface FUChatFootView : UIView <UITextViewDelegate,FUVoiceButtonDelegate>{
-    UIButton*      _menuButton;             // 菜单切换按钮
-    UIButton*      _smileButton;            //头像按钮
-    UIButton*      _extendedButton;         // 更多按钮
-    UIImageView*   _textBoxImage;           // 输入框背景图
-    FUTextView*    _msgTextView;            // 输入框
-    UIButton*      _voiceButton;            // 发送语音按钮
-    UIButton*      _intercomButton;         // 文字与语音切换按钮
-    UIButton*      _sendButton;             //发送按钮
-    NSInteger      _preHeight;              // _msgTextView改变高度之前的高度
-    NSInteger     _maxHeight;              // 显示最大高度，由maxNumberOfLines计算得出
-    NSUInteger   _minHeight;
+@interface FUChatFootView : UIView <UITextViewDelegate>{
+    NSInteger _preHeight;              // _msgTextView改变高度之前的高度
+    NSInteger _maxHeight;              // 显示最大高度，由maxNumberOfLines计算得出
+    NSUInteger _minHeight;
 
 }
-
+// 菜单切换按钮
 @property (nonatomic,strong) UIButton*  menuButton;
+//头像按钮
 @property (nonatomic,strong) UIButton * smileButton;
+// 更多按钮
 @property (nonatomic,strong) UIButton*  extendedButton;
+// 输入框背景图
 //@property (nonatomic,strong) UIImageView*   textBoxImage;
+// 输入框
 @property (nonatomic,strong) FUTextView*    msgTextView;
-@property (nonatomic,assign) BOOL onlyText;
+// 发送语音按钮
+@property (nonatomic, strong) UIButton*   voiceButton;
+//发送按钮
+@property (nonatomic, strong) UIButton*   sendButton;
+// 文字与语音切换按钮
+@property (nonatomic, strong) UIButton*   intercomButton;
+
+@property (nonatomic, assign) BOOL onlyText;
 @property (nonatomic, assign) BOOL voiceDisabled;
 @property (nonatomic, assign) BOOL smileDisabled;
 @property (nonatomic, assign) BOOL extendDisabled;
 @property (nonatomic, assign) BOOL changeCloseBtn;
-@property (nonatomic,weak) id<MessageInputViewDelegate> msgInputViewDelegate;
-@property (nonatomic, strong) UIButton*   voiceButton;
-@property (nonatomic, strong) UIButton*   sendButton;
-@property (nonatomic, strong) UIButton*   intercomButton;
+
+@property (nonatomic, assign) id<MessageInputViewDelegate> msgInputViewDelegate;
 
 //禁用 FootViewMenuButtons
 - (void)disabledFootViewMenuButtons;
